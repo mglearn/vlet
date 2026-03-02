@@ -1,251 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCEA Strategy Partner</title>
-    <style>
-        :root {
-            --blue: #003087; --red: #c8102e; --accent: #005eb8; --light: #f0f4fa;
-            --border: #d1dbe8; --text: #1a1a2e; --mid: #4a5568; --green: #1a7a4a;
-            --orange: #b85c00; --purple: #5b2d8e;
-            --font: 'Segoe UI', system-ui, sans-serif;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--font); background: #eef2f9; color: var(--text); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-
-        /* Header */
-        header { background: var(--blue); color: white; display: flex; align-items: center; gap: 14px; padding: 11px 20px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,.3); z-index: 20; }
-        .logo { width: 42px; height: 42px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--blue); flex-shrink: 0; }
-        .htitle { font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
-        .hsub { font-size: .73rem; opacity: .78; }
-        .badge { margin-left: auto; background: var(--red); color: white; font-size: .68rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; }
-
-        .layout { display: flex; flex: 1; overflow: hidden; }
-
-        /* Sidebar */
-        .sidebar { width: 260px; background: var(--light); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; }
-        .slabel { font-size: .64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--mid); padding: 15px 15px 5px; }
-        .nav-btn { display: flex; align-items: center; width: calc(100% - 20px); margin: 0 10px 4px; background: white; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; cursor: pointer; font-size: .8rem; text-align: left; transition: 0.2s; }
-        .nav-btn:hover, .nav-btn.active { background: #dce6f5; border-color: var(--accent); color: var(--blue); }
-        .nav-btn.active { font-weight: 600; border-left: 4px solid var(--blue); }
-        .es-pill { margin-left: auto; background: var(--blue); color: white; border-radius: 10px; padding: 1px 6px; font-size: .65rem; }
-
-        /* Main Content */
-        .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        .content { flex: 1; overflow-y: auto; padding: 30px; }
-
-        /* Welcome Screen */
-        .welcome-card { text-align: center; max-width: 600px; margin: 60px auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .welcome-card h2 { color: var(--blue); margin-bottom: 15px; }
-        .welcome-card p { line-height: 1.6; color: var(--mid); }
-
-        /* Content Cards */
-        .content-card { display: none; background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); overflow: hidden; max-width: 900px; margin: 0 auto 40px; border: 1px solid var(--border); }
-        .content-card.active { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card-header { padding: 25px; background: linear-gradient(to right, var(--blue), var(--accent)); color: white; }
-        .card-body { padding: 30px; line-height: 1.6; }
-        
-        /* Grid Layouts for Frameworks */
-        .fw-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
-        .fw-item { border: 1px solid var(--border); border-radius: 8px; padding: 15px; }
-        .fw-letter { font-size: 1.5rem; font-weight: 800; margin-bottom: 5px; }
-        .fw-name { font-weight: 700; color: var(--blue); margin-bottom: 8px; }
-        
-        /* Session Tables */
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
-        th { background: var(--light); text-align: left; padding: 12px; border: 1px solid var(--border); color: var(--blue); }
-        td { padding: 12px; border: 1px solid var(--border); vertical-align: top; }
-
-        /* Helpers */
-        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-right: 5px; text-transform: uppercase; }
-        .tag-surface { background: #e0f2f1; color: #00796b; }
-        .tag-deep { background: #e3f2fd; color: #1976d2; }
-        .tag-transfer { background: #f3e5f5; color: #7b1fa2; }
-        .link-btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--blue); color: white; text-decoration: none; border-radius: 5px; font-weight: 600; }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TCEA Strategy Partner — Visible Learning with Ed Tech</title>
+<style>
+:root{--blue:#003087;--red:#c8102e;--accent:#005eb8;--light:#f0f4fa;--border:#d1dbe8;--text:#1a1a2e;--mid:#4a5568;--font:'Segoe UI',system-ui,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:#fff;color:var(--text);line-height:1.6;}
+nav{background:var(--blue);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;padding:0 20px;}
+.nav-logo{display:flex;align-items:center;gap:12px;padding:13px 0;text-decoration:none;color:#fff;flex-shrink:0;}
+.logo-circle{width:40px;height:40px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:var(--blue);}
+.nav-title{font-size:1rem;font-weight:700;line-height:1.2;}
+.nav-sub{font-size:.7rem;opacity:.75;}
+.nav-links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap;}
+.nav-links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.8rem;padding:8px 11px;border-radius:6px;transition:background .15s;}
+.nav-links a:hover{background:rgba(255,255,255,.15);color:#fff;}
+.hero{background:linear-gradient(135deg,var(--blue) 0%,#005eb8 60%,#0073cf 100%);color:#fff;padding:56px 20px 44px;text-align:center;}
+.hero h1{font-size:2rem;font-weight:800;margin-bottom:12px;line-height:1.2;}
+.hero p{font-size:1rem;opacity:.88;max-width:600px;margin:0 auto 24px;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;}
+.hero-chip{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:20px;padding:6px 15px;font-size:.82rem;font-weight:500;}
+section{padding:50px 20px;}
+section:nth-child(even){background:var(--light);}
+.si{max-width:1100px;margin:0 auto;}
+.slabel{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:7px;}
+.stitle{font-size:1.5rem;font-weight:800;color:var(--blue);margin-bottom:9px;}
+.sdesc{color:var(--mid);font-size:.93rem;max-width:660px;margin-bottom:28px;}
+.grid{display:grid;gap:18px;}
+.g3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}
+.g2{grid-template-columns:repeat(auto-fill,minmax(400px,1fr));}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.card-icon{font-size:1.5rem;margin-bottom:9px;}
+.card h3{font-size:.95rem;font-weight:700;color:var(--blue);margin-bottom:6px;}
+.card p,.card li{font-size:.85rem;color:var(--mid);line-height:1.6;}
+.card ul{padding-left:1.2em;margin-top:5px;}
+.card li{margin-bottom:3px;}
+.part-num{font-size:.7rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
+.part-card{border-top:4px solid var(--blue);}
+.es-table{width:100%;border-collapse:collapse;font-size:.87rem;}
+.es-table th{background:var(--blue);color:#fff;padding:10px 13px;text-align:left;}
+.es-table td{padding:9px 13px;border-bottom:1px solid var(--border);}
+.es-table tr:nth-child(even) td{background:#f7f9fd;}
+.badge{display:inline-block;border-radius:12px;padding:2px 10px;font-size:.77rem;font-weight:700;color:#fff;}
+.badge.hi{background:#1b5e20;}
+.badge.md{background:var(--blue);}
+.framework{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.fh{background:var(--blue);color:#fff;padding:13px 18px;}
+.fh h3{font-size:.95rem;font-weight:700;}
+.fh p{font-size:.78rem;opacity:.8;margin-top:2px;}
+.fb{padding:16px 18px;}
+.fr{display:flex;gap:11px;margin-bottom:11px;align-items:flex-start;}
+.fl{width:30px;height:30px;background:var(--blue);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.88rem;flex-shrink:0;}
+.fc strong{font-size:.86rem;color:var(--text);display:block;}
+.fc p{font-size:.8rem;color:var(--mid);margin-top:1px;}
+.solo-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);}
+.solo-row:last-child{border-bottom:none;}
+.sdot{width:13px;height:13px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.slv{font-size:.72rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.5px;}
+.stit{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:2px;}
+.sdsc{font-size:.81rem;color:var(--mid);}
+.role-tabs{display:flex;gap:9px;margin-bottom:18px;flex-wrap:wrap;}
+.rt{padding:8px 17px;border:2px solid var(--blue);border-radius:20px;font-size:.83rem;font-weight:600;color:var(--blue);cursor:pointer;transition:all .15s;background:#fff;}
+.rt.active,.rt:hover{background:var(--blue);color:#fff;}
+.rc{display:none;}
+.rc.active{display:block;}
+.cta-box{background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;border-radius:14px;padding:34px 28px;text-align:center;}
+.cta-box h3{font-size:1.3rem;font-weight:800;margin-bottom:9px;}
+.cta-box p{opacity:.88;font-size:.91rem;max-width:500px;margin:0 auto 20px;}
+.cta-btn{display:inline-block;background:#fff;color:var(--blue);border-radius:8px;padding:10px 26px;font-weight:700;font-size:.9rem;text-decoration:none;transition:opacity .15s;margin:4px;}
+.cta-btn:hover{opacity:.9;}
+.cta-btn.out{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);}
+.cta-btn.out:hover{background:rgba(255,255,255,.15);}
+footer{background:var(--blue);color:rgba(255,255,255,.75);text-align:center;padding:22px 20px;font-size:.81rem;}
+footer a{color:rgba(255,255,255,.9);}
+footer strong{color:#fff;}
+@media(max-width:640px){.hero h1{font-size:1.4rem;}.nav-links{display:none;}.g2{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
 
-<header>
-    <div class="logo">TCEA</div>
-    <div>
-        <div class="htitle">Visible Learning with Ed Tech</div>
-        <div class="hsub">AI-Powered Strategy Partner Dashboard</div>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="logo-circle">TCEA</div>
+      <div><div class="nav-title">TCEA Strategy Partner</div><div class="nav-sub">Visible Learning with Ed Tech</div></div>
+    </a>
+    <div class="nav-links">
+      <a href="#series">Series</a>
+      <a href="#strategies">Strategies</a>
+      <a href="#solo">SOLO</a>
+      <a href="#frameworks">Frameworks</a>
+      <a href="#roles">By Role</a>
+      <a href="#partner">AI Partner</a>
     </div>
-    <div class="badge">MASTERY SERIES</div>
-</header>
+  </div>
+</nav>
 
-<div class="layout">
-    <div class="sidebar">
-        <div class="slabel">Frameworks</div>
-        <button class="nav-btn" onclick="showCard('p-solo')">SOLO Taxonomy</button>
-        <button class="nav-btn" onclick="showCard('p-prism')">PRISM Framework</button>
-        <button class="nav-btn" onclick="showCard('p-coaching')">TCEA EIIR Coaching</button>
-
-        <div class="slabel">Evidence-Based Strategies</div>
-        <button class="nav-btn" onclick="showCard('p-jigsaw')">Jigsaw Method <span class="es-pill">0.92</span></button>
-        <button class="nav-btn" onclick="showCard('p-concept')">Concept Mapping <span class="es-pill">0.72</span></button>
-        <button class="nav-btn" onclick="showCard('p-reciprocal')">Reciprocal Teaching <span class="es-pill">0.74</span></button>
-        <button class="nav-btn" onclick="showCard('p-problem')">Problem Solving <span class="es-pill">0.61</span></button>
-
-        <div class="slabel">Series Sessions (1-8)</div>
-        <button class="nav-btn" onclick="showCard('s-1')">1: Evidence to Impact</button>
-        <button class="nav-btn" onclick="showCard('s-2')">2: Mapping Mastery</button>
-        <button class="nav-btn" onclick="showCard('s-3')">3: Strategic Synergy</button>
-        <button class="nav-btn" onclick="showCard('s-4')">4: Surface Spark</button>
-        <button class="nav-btn" onclick="showCard('s-5')">5: Deep Dive Dynamics</button>
-        <button class="nav-btn" onclick="showCard('s-6')">6: Transfer Triumph</button>
-        <button class="nav-btn" onclick="showCard('s-7')">7: AI Innovator</button>
-        <button class="nav-btn" onclick="showCard('s-8')">8: Reflect & Reach</button>
-    </div>
-
-    <div class="main">
-        <div class="content">
-            <div id="p-welcome" class="content-card active">
-                <div class="welcome-card">
-                    <div style="font-size: 3rem; margin-bottom: 20px;">🚀</div>
-                    <h2>Welcome to the Strategy Partner</h2>
-                    <p>Unlock the power of evidence-based teaching. Select a strategy or session from the sidebar to view high-impact implementation guides, effect sizes, and digital tool alignments.</p>
-                    <a href="https://teach.link/tceastrategypartner" target="_blank" class="link-btn">Launch AI Strategy Partner (GPT)</a>
-                </div>
-            </div>
-
-            <div id="p-solo" class="content-card">
-                <div class="card-header">
-                    <h2>SOLO Taxonomy</h2>
-                    <p>Structure of Observed Learning Outcome</p>
-                </div>
-                <div class="card-body">
-                    <p>A research-based alternative to Bloom's that assesses the <strong>complexity</strong> of student understanding.</p>
-                    <div class="fw-grid">
-                        <div class="fw-item" style="border-top: 4px solid var(--mid)">
-                            <div class="fw-name">Prestructural</div>
-                            <p style="font-size:0.85rem">"I don't know what I don't know." Inaccurate or irrelevant responses.</p>
-                        </div>
-                        <div class="fw-item" style="border-top: 4px solid var(--green)">
-                            <div class="fw-name">Unistructural</div>
-                            <p style="font-size:0.85rem">Understanding one relevant aspect. Surface level.</p>
-                        </div>
-                        <div class="fw-item" style="border-top: 4px solid var(--green)">
-                            <div class="fw-name">Multistructural</div>
-                            <p style="font-size:0.85rem">Several relevant aspects known, but as separate pieces.</p>
-                        </div>
-                        <div class="fw-item" style="border-top: 4px solid var(--blue)">
-                            <div class="fw-name">Relational</div>
-                            <p style="font-size:0.85rem">Integrating parts into a coherent whole. Deep learning.</p>
-                        </div>
-                        <div class="fw-item" style="border-top: 4px solid var(--purple)">
-                            <div class="fw-name">Extended Abstract</div>
-                            <p style="font-size:0.85rem">Generalizing to new domains. Transfer learning.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="p-prism" class="content-card">
-                <div class="card-header">
-                    <h2>PRISM Framework</h2>
-                    <p>Structured thinking for complex problem-solving and transfer learning.</p>
-                </div>
-                <div class="card-body">
-                    <div class="fw-grid">
-                        <div class="fw-item"><div class="fw-letter" style="color:var(--red)">P</div><div class="fw-name">Patterns</div><p>What recurring trends do you notice?</p></div>
-                        <div class="fw-item"><div class="fw-letter" style="color:var(--orange)">R</div><div class="fw-name">Reasoning</div><p>How do the pieces connect logically?</p></div>
-                        <div class="fw-item"><div class="fw-letter" style="color:var(--green)">I</div><div class="fw-name">Ideas</div><p>Generating multiple approaches or perspectives.</p></div>
-                        <div class="fw-item"><div class="fw-letter" style="color:var(--blue)">S</div><div class="fw-name">Situation</div><p>Considering the broader context and implications.</p></div>
-                        <div class="fw-item"><div class="fw-letter" style="color:var(--purple)">M</div><div class="fw-name">Methods</div><p>Evaluating and verifying solutions.</p></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="p-jigsaw" class="content-card">
-                <div class="card-header">
-                    <h2>Jigsaw Method (ES: 0.92)</h2>
-                    <span class="tag tag-surface">Surface</span> <span class="tag tag-deep">Deep</span>
-                </div>
-                <div class="card-body">
-                    <h3>Core Concept</h3>
-                    <p>Divides content into segments, making students both learners and teachers. Fosters interdependence and doubles learning acceleration.</p>
-                    <table>
-                        <tr><th>Phase</th><th>Action</th></tr>
-                        <tr><td>Home Groups</td><td>Assign unique content chunks to master.</td></tr>
-                        <tr><td>Expert Groups</td><td>Study specific content deeply with peers.</td></tr>
-                        <tr><td>Teach Back</td><td>Return to Home Groups to share expertise.</td></tr>
-                    </table>
-                    <h4 style="margin-top:20px;">EdTech Tools</h4>
-                    <p>Google Sites, Padlet, Digital Whiteboards (Whiteboard.fi).</p>
-                </div>
-            </div>
-
-            <div id="s-1" class="content-card">
-                <div class="card-header">
-                    <h2>Part 1: Evidence to Impact</h2>
-                </div>
-                <div class="card-body">
-                    <h3>Core Concept</h3>
-                    <p>Introduces foundational principles of evidence-based teaching to maximize student engagement and achievement from day one.</p>
-                    <h3 style="margin-top:20px;">Key Learnings</h3>
-                    <ul>
-                        <li>Understand Effect Size (Hattie) - Target > 0.40</li>
-                        <li>Differentiate learning phases: Surface, Deep, Transfer.</li>
-                        <li>"What the hand does, the mind remembers."</li>
-                    </ul>
-                    <a href="https://drive.google.com/drive/folders/1MaTppynMFe1YMVj6Sp4RVY21ZhDnVf7L" class="link-btn">View Materials</a>
-                </div>
-            </div>
-
-            <div id="p-coaching" class="content-card">
-                <div class="card-header">
-                    <h2>TCEA EIIR Coaching & RISE Goals</h2>
-                </div>
-                <div class="card-body">
-                    <h3>The EIIR Cycle</h3>
-                    <p>Empower/Engage → Investigate/Innovate → Implement/Improve → Reflect/Realize</p>
-                    
-                    <h3 style="margin-top:20px;">RISE Goal Criteria</h3>
-                    <div class="fw-grid">
-                        <div class="fw-item"><strong>R</strong> - Relevant</div>
-                        <div class="fw-item"><strong>I</strong> - Impactful</div>
-                        <div class="fw-item"><strong>S</strong> - Specific</div>
-                        <div class="fw-item"><strong>E</strong> - Energized</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="s-default" class="content-card">
-                <div class="card-body" style="text-align: center;">
-                    <h3>Content Loading...</h3>
-                    <p>Please select a specific section from the sidebar to view full details.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+<div class="hero">
+  <h1>Visible Learning with Ed Tech</h1>
+  <p>An eight-part mastery series pairing evidence-based instructional strategies with purposeful technology integration — for teachers, coaches, and campus leaders.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">📊 Effect sizes from Visible Learning MetaX</span>
+    <span class="hero-chip">🧠 Surface · Deep · Transfer Learning</span>
+    <span class="hero-chip">🤖 AI-Powered Strategy Support</span>
+    <span class="hero-chip">👩‍🏫 Facilitated by Miguel Guhlin · TCEA</span>
+  </div>
 </div>
 
+<!-- SERIES -->
+<section id="series">
+  <div class="si">
+    <div class="slabel">The Series</div>
+    <div class="stitle">Eight Parts. One Cohesive Journey.</div>
+    <div class="sdesc">Each installment includes a 30–45 minute video, slide deck, one-pager, and session resources — all building toward confident, evidence-informed practice.</div>
+    <div class="grid g3">
+      <div class="card part-card"><div class="part-num">Part 1</div><h3>Evidence to Impact</h3><p>Foundational principles of evidence-based teaching. Explore John Hattie, Mike Bell, and the Visible Learning framework. Learn to match strategies to learning phases from day one.</p></div>
+      <div class="card part-card"><div class="part-num">Part 2</div><h3>Mapping Mastery with SOLO Taxonomy</h3><p>Understand the Structure of Observed Learning Outcome. Assess where students are and guide them from unistructural knowledge to extended abstract thinking.</p></div>
+      <div class="card part-card"><div class="part-num">Part 3</div><h3>Strategic Synergy</h3><p>Stop guessing, start strategizing. Align ed tech tools to Surface, Deep, and Transfer phases using the Amazing Lesson Design Outline (ALDO).</p></div>
+      <div class="card part-card"><div class="part-num">Part 4</div><h3>Surface Spark</h3><p>Deep dive on the Jigsaw Method (ES: 0.92) — the only strategy effective across both Surface and Deep learning. Includes digital tool integration and a Jigsaw Notes Organizer.</p></div>
+      <div class="card part-card"><div class="part-num">Part 5</div><h3>Deep Dive Dynamics</h3><p>Concept Mapping (ES: 0.66) using the BOOM Model, and Reciprocal Teaching (ES: 0.74) with the Fab Four: Predict, Question, Clarify, Summarize.</p></div>
+      <div class="card part-card"><div class="part-num">Part 6</div><h3>Transfer Triumph</h3><p>Problem-Solving Teaching (ES: 0.61) and Critical Thinking (ES: 0.79) using PRISM, FLOATER, and SIFT to move students to Extended Abstract.</p></div>
+      <div class="card part-card"><div class="part-num">Part 7</div><h3>AI Innovator</h3><p>Access the custom TCEA Strategy Partner AI — trained on all series content. Get tailored strategy advice, lesson ideas, and coaching support via BoodleBox or ChatGPT.</p></div>
+      <div class="card part-card"><div class="part-num">Part 8</div><h3>Reflect and Reach</h3><p>Implementation planning using the TCEA EIIR Coaching Cycle and RISE goals. Role-specific action plans for teachers, instructional coaches, and campus leaders.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGIES -->
+<section id="strategies">
+  <div class="si">
+    <div class="slabel">High-Impact Strategies</div>
+    <div class="stitle">Effect Sizes That Matter</div>
+    <div class="sdesc">Strategies with an effect size above 0.4 accelerate student learning beyond typical growth. Those near 0.8 can double learning in a single year.</div>
+    <table class="es-table">
+      <thead><tr><th>Strategy</th><th>Effect Size</th><th>Learning Phase</th><th>SOLO Level</th></tr></thead>
+      <tbody>
+        <tr><td>Collective Teacher Efficacy</td><td><span class="badge hi">1.01</span></td><td>All Phases</td><td>All Levels</td></tr>
+        <tr><td>Video Microteaching</td><td><span class="badge hi">0.99</span></td><td>Professional Learning</td><td>All Levels</td></tr>
+        <tr><td>Jigsaw Method</td><td><span class="badge hi">0.92</span></td><td>Surface + Deep</td><td>Multi → Relational</td></tr>
+        <tr><td>Argumentation</td><td><span class="badge hi">0.86</span></td><td>Deep</td><td>Relational</td></tr>
+        <tr><td>Teacher Clarity</td><td><span class="badge hi">0.85</span></td><td>All Phases</td><td>All Levels</td></tr>
+        <tr><td>Self-Reflection / Self-Reported Grades</td><td><span class="badge hi">0.81</span></td><td>All Phases</td><td>All Levels</td></tr>
+        <tr><td>Critical Thinking</td><td><span class="badge hi">0.79</span></td><td>Deep + Transfer</td><td>Relational → Extended</td></tr>
+        <tr><td>Transfer Strategies</td><td><span class="badge md">0.75</span></td><td>Transfer</td><td>Extended Abstract</td></tr>
+        <tr><td>Reciprocal Teaching</td><td><span class="badge md">0.74</span></td><td>Deep</td><td>Relational</td></tr>
+        <tr><td>Concept Mapping</td><td><span class="badge md">0.66</span></td><td>Deep</td><td>Multi → Relational</td></tr>
+        <tr><td>Success Criteria</td><td><span class="badge md">0.64</span></td><td>All Phases</td><td>All Levels</td></tr>
+        <tr><td>Vocabulary Programs</td><td><span class="badge md">0.62</span></td><td>Surface</td><td>Uni → Multi</td></tr>
+        <tr><td>Problem-Solving Teaching</td><td><span class="badge md">0.61</span></td><td>Transfer</td><td>Extended Abstract</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:11px;font-size:.78rem;color:var(--mid);">Source: John Hattie, <em>Visible Learning</em> / Corwin Press Visible Learning MetaX database</p>
+  </div>
+</section>
+
+<!-- SOLO -->
+<section id="solo">
+  <div class="si">
+    <div class="slabel">SOLO Taxonomy</div>
+    <div class="stitle">Structure of Observed Learning Outcome</div>
+    <div class="sdesc">A practical framework for assessing the quality of student understanding — from surface-level recall to creative abstract application. Approximately 82% of classroom teaching remains at the surface level.</div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="solo-row"><div class="sdot" style="background:#9e9e9e"></div><div><div class="slv">Pre-Structural</div><div class="stit">Before Formal Instruction</div><div class="sdsc">Prior knowledge may be inaccurate. "I don't know what I don't know." Response is irrelevant or misses the point entirely.</div></div></div>
+        <div class="solo-row"><div class="sdot" style="background:#2196f3"></div><div><div class="slv">Unistructural · Surface</div><div class="stit">One Relevant Idea</div><div class="sdsc">Learner identifies one relevant piece of information but cannot connect it to other concepts.</div></div></div>
+        <div class="solo-row"><div class="sdot" style="background:#03a9f4"></div><div><div class="slv">Multistructural · Surface</div><div class="stit">Several Ideas, Not Yet Connected</div><div class="sdsc">Knows several relevant facts but sees them as separate — cannot yet explain how they interrelate or reconcile contradictions.</div></div></div>
+        <div class="solo-row"><div class="sdot" style="background:#4caf50"></div><div><div class="slv">Relational · Deep</div><div class="stit">Understanding Relationships</div><div class="sdsc">Links ideas together, sees the bigger picture, explains how parts fit together. Can reconcile conflicting information. Most adults operate here.</div></div></div>
+        <div class="solo-row"><div class="sdot" style="background:#ff9800"></div><div><div class="slv">Extended Abstract · Transfer</div><div class="stit">Generalizing to New Contexts</div><div class="sdsc">Goes beyond given information, applies principles to novel situations, creates something new. Theorizes and innovates independently.</div></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card">
+          <div class="card-icon">⚠️</div>
+          <h3>Understanding vs. Production Gap</h3>
+          <p>When a student's verbal understanding is at Extended Abstract but written work appears Unistructural, the barrier may be language or writing skill — not comprehension. Hold a brief conference to diagnose before drawing conclusions.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>AI Integration by SOLO Level</h3>
+          <ul>
+            <li><strong>Pre / Unistructural:</strong> Teacher-led AI for retrieval practice, entry/exit tickets</li>
+            <li><strong>Multistructural:</strong> AI-curated viewpoints, SIFT/FLOATER frameworks</li>
+            <li><strong>Relational:</strong> AI as brainstorming partner, PRISM support</li>
+            <li><strong>Extended Abstract:</strong> AI for rapid prototyping, hypothesis testing</li>
+          </ul>
+          <p style="margin-top:9px;font-size:.79rem;color:var(--red);font-weight:600;">Learning is deeper and more durable when it's effortful. AI should amplify — not shortcut — student thinking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORKS -->
+<section id="frameworks">
+  <div class="si">
+    <div class="slabel">Instructional Frameworks</div>
+    <div class="stitle">Structures That Drive Practice</div>
+    <div class="sdesc">These frameworks organize strategy selection, lesson design, coaching cycles, and critical thinking across all learning phases.</div>
+    <div class="grid g3">
+
+      <div class="framework">
+        <div class="fh"><h3>ALDO — Amazing Lesson Design Outline</h3><p>Five-component lesson architecture grounded in SEL, brain-based learning, and evidence-based strategies</p></div>
+        <div class="fb">
+          <div class="fr"><div class="fl">1</div><div class="fc"><strong>Build Relationships</strong><p>Trust and safety via SEL and brain-based learning</p></div></div>
+          <div class="fr"><div class="fl">2</div><div class="fc"><strong>Pre-Assess</strong><p>Low-stakes assessments to identify where students are</p></div></div>
+          <div class="fr"><div class="fl">3</div><div class="fc"><strong>Select Strategies</strong><p>High-effect size strategies matched to the learning phase</p></div></div>
+          <div class="fr"><div class="fl">4</div><div class="fc"><strong>Post-Assess</strong><p>Gauge effectiveness and provide targeted feedback</p></div></div>
+          <div class="fr"><div class="fl">5</div><div class="fc"><strong>Reflect and Share</strong><p>Metacognition for both teachers and learners</p></div></div>
+        </div>
+      </div>
+
+      <div class="framework">
+        <div class="fh"><h3>PRISM Framework</h3><p>Structures complex thinking for Deep and Transfer learning phases</p></div>
+        <div class="fb">
+          <div class="fr"><div class="fl">P</div><div class="fc"><strong>Patterns</strong><p>Identify recurring patterns in information</p></div></div>
+          <div class="fr"><div class="fl">R</div><div class="fc"><strong>Reasoning</strong><p>Understand how ideas connect and relate logically</p></div></div>
+          <div class="fr"><div class="fl">I</div><div class="fc"><strong>Ideas</strong><p>Generate and combine multiple approaches</p></div></div>
+          <div class="fr"><div class="fl">S</div><div class="fc"><strong>Situation</strong><p>Consider the broader context and implications</p></div></div>
+          <div class="fr"><div class="fl">M</div><div class="fc"><strong>Methods</strong><p>Evaluate approaches and test proposed solutions</p></div></div>
+        </div>
+      </div>
+
+      <div class="framework">
+        <div class="fh"><h3>TCEA EIIR Coaching Cycle</h3><p>A structured coaching model for evidence-based instructional improvement</p></div>
+        <div class="fb">
+          <div class="fr"><div class="fl" style="background:var(--red)">E</div><div class="fc"><strong>Empower &amp; Engage</strong><p>Build trust, assess needs, establish RISE goals</p></div></div>
+          <div class="fr"><div class="fl" style="background:var(--red)">I</div><div class="fc"><strong>Investigate &amp; Innovate</strong><p>Explore strategies, research best practices</p></div></div>
+          <div class="fr"><div class="fl" style="background:var(--red)">I</div><div class="fc"><strong>Implement &amp; Improve</strong><p>Put plans into action, gather data, adjust</p></div></div>
+          <div class="fr"><div class="fl" style="background:var(--red)">R</div><div class="fc"><strong>Reflect &amp; Realize</strong><p>Evaluate impact, celebrate successes, plan next steps</p></div></div>
+        </div>
+      </div>
+
+      <div class="framework">
+        <div class="fh"><h3>LEARNS Cycle</h3><p>Mike Bell's instructional design cycle aligned to memory formation</p></div>
+        <div class="fb">
+          <div class="fr"><div class="fl">L</div><div class="fc"><strong>Locate</strong><p>Identify current knowledge and skills</p></div></div>
+          <div class="fr"><div class="fl">E</div><div class="fc"><strong>Explore</strong><p>Discover and engage with new information</p></div></div>
+          <div class="fr"><div class="fl">A</div><div class="fc"><strong>Apply</strong><p>Put newly acquired knowledge into practice</p></div></div>
+          <div class="fr"><div class="fl">R</div><div class="fc"><strong>Review</strong><p>Seek feedback to identify strengths and gaps</p></div></div>
+          <div class="fr"><div class="fl">N</div><div class="fc"><strong>Nurture</strong><p>Practice, repeat, and reflect for long-term retention</p></div></div>
+        </div>
+      </div>
+
+      <div class="framework">
+        <div class="fh"><h3>FLOATER — Critical Thinking</h3><p>Melanie Trecek-King's framework for evaluating claims and information</p></div>
+        <div class="fb">
+          <div class="fr"><div class="fl">F</div><div class="fc"><strong>Falsifiability</strong><p>Can the claim be disproven?</p></div></div>
+          <div class="fr"><div class="fl">L</div><div class="fc"><strong>Logic</strong><p>Does the reasoning make sense?</p></div></div>
+          <div class="fr"><div class="fl">O</div><div class="fc"><strong>Objectivity</strong><p>Is it free from bias?</p></div></div>
+          <div class="fr"><div class="fl">A</div><div class="fc"><strong>Alternative Explanations</strong><p>Are there other possibilities?</p></div></div>
+          <div class="fr"><div class="fl">T</div><div class="fc"><strong>Tentative Conclusions</strong><p>Could this change with new evidence?</p></div></div>
+          <div class="fr"><div class="fl">E</div><div class="fc"><strong>Evidence</strong><p>Is there robust, reliable evidence?</p></div></div>
+          <div class="fr"><div class="fl">R</div><div class="fc"><strong>Replicability</strong><p>Can results be independently repeated?</p></div></div>
+        </div>
+      </div>
+
+      <div class="framework">
+        <div class="fh"><h3>RISE Goals</h3><p>Goal-setting criteria for the EIIR Coaching Cycle's Empower &amp; Engage phase</p></div>
+        <div class="fb">
+          <div class="fr"><div class="fl" style="background:#2e7d32">R</div><div class="fc"><strong>Relevant</strong><p>Aligns with teacher needs, student objectives, and school priorities</p></div></div>
+          <div class="fr"><div class="fl" style="background:#2e7d32">I</div><div class="fc"><strong>Impactful</strong><p>Leads to significant, measurable improvement in student outcomes</p></div></div>
+          <div class="fr"><div class="fl" style="background:#2e7d32">S</div><div class="fc"><strong>Specific</strong><p>Clearly defined with concrete actions, timelines, and measurable outcomes</p></div></div>
+          <div class="fr"><div class="fl" style="background:#2e7d32">E</div><div class="fc"><strong>Energized</strong><p>Resonates with the teacher's interests and creates genuine motivation</p></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:20px;">
+      <div class="card" style="max-width:460px;">
+        <div class="card-icon">🔍</div>
+        <h3>SIFT — Media Literacy</h3>
+        <ul>
+          <li><strong>Stop</strong> — Pause before sharing or reacting</li>
+          <li><strong>Investigate</strong> — Check the source and its credibility</li>
+          <li><strong>Find</strong> — Look for multiple angles and perspectives</li>
+          <li><strong>Trace</strong> — Find the original source of the claim</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BY ROLE -->
+<section id="roles">
+  <div class="si">
+    <div class="slabel">By Role</div>
+    <div class="stitle">Implementation Ideas</div>
+    <div class="sdesc">Evidence-based strategies look different depending on your position. Select your role for targeted starting points.</div>
+    <div class="role-tabs">
+      <div class="rt active" onclick="showRole('teacher',this)">👩‍🏫 Classroom Teacher</div>
+      <div class="rt" onclick="showRole('coach',this)">🔄 Instructional Coach</div>
+      <div class="rt" onclick="showRole('leader',this)">🏫 Campus Leader</div>
+    </div>
+
+    <div id="rc-teacher" class="rc active">
+      <div class="grid g3">
+        <div class="card"><div class="card-icon">📋</div><h3>Plan with ALDO</h3><p>Use the Amazing Lesson Design Outline to anchor every lesson in a learning phase. Identify the SOLO level you're targeting, then select a strategy with an effect size above 0.4.</p></div>
+        <div class="card"><div class="card-icon">🧩</div><h3>Routinize the Jigsaw</h3><p>The Jigsaw Method (ES: 0.92) requires multiple uses before it runs smoothly. Start with 3 content chunks. It is the only strategy effective across both Surface and Deep learning phases.</p></div>
+        <div class="card"><div class="card-icon">🗣️</div><h3>Run Reciprocal Teaching Daily</h3><p>15–30 minutes per day for 15–20 days. Teach one Fab Four role per week: Predict, Question, Clarify, Summarize. Works with video and any media — not just text.</p></div>
+        <div class="card"><div class="card-icon">🗺️</div><h3>Concept Map with BOOM</h3><p>Brainstorm → Organize → Open connections → Make it meaningful. Use Diagrams.net or CMAP Cloud. Partially completed maps scaffold students who need additional support.</p></div>
+        <div class="card"><div class="card-icon">📝</div><h3>Sample RISE Goal</h3><p><strong>Jigsaw in Science (ES: 0.92):</strong> Create expert groups for 5 key concepts with structured note-taking templates. Target: move students from Multistructural to Relational understanding.</p></div>
+        <div class="card"><div class="card-icon">⚠️</div><h3>Technology Caution</h3><p>Strategy comes first — then select the tool. Do not use discontinued tools: Jamboard, Flip, or Flipgrid. Current alternatives include Padlet, Whiteboard.fi, Google Slides, and OneNote.</p></div>
+      </div>
+    </div>
+
+    <div id="rc-coach" class="rc">
+      <div class="grid g3">
+        <div class="card"><div class="card-icon">🔄</div><h3>Use the EIIR Cycle</h3><p>Structure every coaching relationship: Empower &amp; Engage → Investigate &amp; Innovate → Implement &amp; Improve → Reflect &amp; Realize. Establish RISE goals in the first phase.</p></div>
+        <div class="card"><div class="card-icon">📊</div><h3>SOLO Calibration Sessions</h3><p>Bring anonymous student work to PLC. Collaboratively identify the SOLO level for each piece. Builds shared, consistent understanding of the framework across a grade level or campus.</p></div>
+        <div class="card"><div class="card-icon">📹</div><h3>Video Microteaching (ES: 0.99)</h3><p>Guide teachers through a record → reflect → improve cycle. One of the highest effect size approaches for professional learning available. Creates low-stakes, growth-oriented observation culture.</p></div>
+        <div class="card"><div class="card-icon">🤝</div><h3>Co-Plan ALDO Lessons</h3><p>Focus on Step 3 of ALDO (Select Strategies). Match digital tools to the chosen strategy and learning phase deliberately — not based on availability or trend.</p></div>
+        <div class="card"><div class="card-icon">🎯</div><h3>Sample RISE Goal</h3><p><strong>Video Microteaching with 5 teachers:</strong> Guide each through a recording, collaborative reflection, and one implementation improvement within the coaching cycle.</p></div>
+        <div class="card"><div class="card-icon">🔬</div><h3>Model Strategic Tech Use</h3><p>During co-teaching, narrate your reasoning aloud: "We're using Diagrams.net because our goal is Deep Learning — it helps students visualize relationships, not just list facts."</p></div>
+      </div>
+    </div>
+
+    <div id="rc-leader" class="rc">
+      <div class="grid g3">
+        <div class="card"><div class="card-icon">🏫</div><h3>Champion SOLO as Common Language</h3><p>Reference SOLO levels in walkthroughs, PD sessions, and feedback conversations. Make it part of daily instructional culture — not a one-time professional development topic.</p></div>
+        <div class="card"><div class="card-icon">👥</div><h3>Build Collective Efficacy (ES: 1.01)</h3><p>Implement monthly data meetings with structured protocols. The highest effect size in Visible Learning research. Create systems where teachers believe in their collective impact on student learning.</p></div>
+        <div class="card"><div class="card-icon">📈</div><h3>Align PD to Effect Sizes</h3><p>Use effect size data as a filter when evaluating technology purchases and planning professional development. Prioritize tools and training tied to high-impact strategies.</p></div>
+        <div class="card"><div class="card-icon">🗂️</div><h3>Structure PLCs Around Evidence</h3><p>Shift PLC focus from "what was the score?" to "what does this work tell us about student thinking?" Dedicate recurring time to analyzing student work through the SOLO lens.</p></div>
+        <div class="card"><div class="card-icon">🎯</div><h3>Sample RISE Goal</h3><p><strong>Campus Argumentation Focus (ES: 0.86):</strong> Provide professional development and create a cross-curricular resource bank. Builds critical thinking across disciplines with strong effect.</p></div>
+        <div class="card"><div class="card-icon">🔧</div><h3>Promote ALDO Campus-Wide</h3><p>Champion ALDO as the shared lesson design framework. Reference it in walkthroughs to ensure technology integration is purposeful and tied to a learning phase — not just present.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI PARTNER -->
+<section id="partner" style="background:var(--light);">
+  <div class="si">
+    <div class="slabel">Part 7 — AI Innovator</div>
+    <div class="stitle">Your TCEA Strategy Partner</div>
+    <div class="sdesc">A custom AI assistant trained on all series content. Get tailored strategy advice, lesson ideas, and coaching support via BoodleBox or a web interface.</div>
+    <div class="cta-box">
+      <h3>Access the TCEA Strategy Partner</h3>
+      <p>Trained on Visible Learning research, SOLO Taxonomy, all eight series parts, EIIR coaching, PRISM, FLOATER, SIFT, and RISE goals. Your personalized instructional thought partner.</p>
+      <a class="cta-btn" href="https://box.boodle.ai/a/@VLET_StrategyPartner" target="_blank">Open in BoodleBox</a>
+      <a class="cta-btn out" href="https://mglearn.github.io/vlet/" target="_blank">Web Version</a>
+    </div>
+    <div class="grid g3" style="margin-top:22px;">
+      <div class="card"><div class="card-icon">✍️</div><h3>Sample Prompt — Teachers</h3><p>I've uploaded my lesson plan on [topic]. What high-impact strategies (ES &gt; 0.4) would be most appropriate for students at the Multistructural level? Please suggest specific implementation steps for each strategy.</p></div>
+      <div class="card"><div class="card-icon">🔄</div><h3>Sample Prompt — Coaches</h3><p>Help me launch a coaching cycle using the TCEA EIIR model. My teacher wants to improve student engagement during Deep Learning. Suggest a RISE goal and a matching strategy with its effect size.</p></div>
+      <div class="card"><div class="card-icon">🏫</div><h3>Sample Prompt — Leaders</h3><p>I want to build Collective Teacher Efficacy on my campus. What does the research say, and what specific structures should I put in place this semester to support it?</p></div>
+    </div>
+    <p style="margin-top:14px;font-size:.79rem;color:var(--mid);"><strong>Access:</strong> August 1, 2025 – August 1, 2026 &nbsp;·&nbsp; Requires a free BoodleBox or ChatGPT account &nbsp;·&nbsp; Do not submit student personally identifiable information into any AI tool</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>TCEA Mastery Series: Visible Learning with Ed Tech</strong></p>
+  <p style="margin-top:5px;">Facilitated by Miguel Guhlin &nbsp;·&nbsp; <a href="mailto:mguhlin@tcea.org">mguhlin@tcea.org</a> &nbsp;·&nbsp; <a href="https://tinyurl.com/tcearegisterVL" target="_blank">Register for the Series</a></p>
+  <p style="margin-top:7px;font-size:.74rem;opacity:.6;">Effect sizes from John Hattie's Visible Learning / Corwin Press Visible Learning MetaX database</p>
+</footer>
+
 <script>
-    function showCard(id) {
-        // Hide all cards
-        const cards = document.querySelectorAll('.content-card');
-        cards.forEach(card => card.classList.remove('active'));
-
-        // Show selected
-        const activeCard = document.getElementById(id) || document.getElementById('s-default');
-        activeCard.classList.add('active');
-
-        // Update sidebar button states
-        const buttons = document.querySelectorAll('.nav-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        
-        // Find the button that was clicked and highlight it
-        const clickedBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(id));
-        if (clickedBtn) clickedBtn.classList.add('active');
-    }
+function showRole(r, el) {
+  document.querySelectorAll('.rc').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.rt').forEach(t => t.classList.remove('active'));
+  document.getElementById('rc-' + r).classList.add('active');
+  el.classList.add('active');
+}
 </script>
-
 </body>
 </html>
