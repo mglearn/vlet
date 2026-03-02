@@ -1,598 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>TCEA Strategy Partner</title>
-<style>
-:root{
-  --blue:#003087;--red:#c8102e;--accent:#005eb8;--light:#f0f4fa;
-  --border:#d1dbe8;--text:#1a1a2e;--mid:#4a5568;--green:#1a7a4a;
-  --orange:#b85c00;--purple:#5b2d8e;
-  --font:'Segoe UI',system-ui,sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--font);background:#eef2f9;color:var(--text);display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCEA Strategy Partner</title>
+    <style>
+        :root {
+            --blue: #003087; --red: #c8102e; --accent: #005eb8; --light: #f0f4fa;
+            --border: #d1dbe8; --text: #1a1a2e; --mid: #4a5568; --green: #1a7a4a;
+            --orange: #b85c00; --purple: #5b2d8e;
+            --font: 'Segoe UI', system-ui, sans-serif;
+        }
 
-header{background:var(--blue);color:white;display:flex;align-items:center;gap:14px;padding:11px 20px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);z-index:20;}
-.logo{width:42px;height:42px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:var(--blue);flex-shrink:0;}
-.htitle{font-size:1.1rem;font-weight:700;line-height:1.2;}
-.hsub{font-size:.73rem;opacity:.78;margin-top:2px;}
-.badge{margin-left:auto;background:var(--red);color:white;font-size:.68rem;padding:3px 10px;border-radius:12px;font-weight:700;white-space:nowrap;}
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font); background: #eef2f9; color: var(--text); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
-.layout{display:flex;flex:1;overflow:hidden;}
+        /* Header */
+        header { background: var(--blue); color: white; display: flex; align-items: center; gap: 14px; padding: 11px 20px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,.3); z-index: 20; }
+        .logo { width: 42px; height: 42px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--blue); flex-shrink: 0; }
+        .htitle { font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+        .hsub { font-size: .73rem; opacity: .78; }
+        .badge { margin-left: auto; background: var(--red); color: white; font-size: .68rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; }
 
-.sidebar{width:256px;background:var(--light);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;}
-.slabel{font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--mid);padding:13px 13px 6px;}
-.strat-btn{display:flex;align-items:center;justify-content:space-between;width:calc(100% - 18px);margin:0 9px 5px;background:white;border:1px solid var(--border);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:.79rem;color:var(--text);text-align:left;transition:background .15s,border-color .15s;gap:6px;}
-.strat-btn:hover,.strat-btn.active{background:#dce6f5;border-color:var(--accent);}
-.strat-btn.active{border-color:var(--blue);}
-.strat-name{flex:1;font-weight:500;line-height:1.3;}
-.es-pill{background:var(--blue);color:white;border-radius:10px;padding:2px 7px;font-size:.68rem;font-weight:700;white-space:nowrap;flex-shrink:0;}
-.es-pill.high{background:#1a7a4a;}
+        .layout { display: flex; flex: 1; overflow: hidden; }
 
-.divider{height:1px;background:var(--border);margin:5px 13px;}
-.phase-item{display:flex;align-items:center;gap:8px;padding:7px 13px;font-size:.78rem;cursor:pointer;border-radius:6px;margin:0 5px 2px;transition:background .15s;}
-.phase-item:hover,.phase-item.active{background:#dce6f5;}
-.phase-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+        /* Sidebar */
+        .sidebar { width: 260px; background: var(--light); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; }
+        .slabel { font-size: .64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--mid); padding: 15px 15px 5px; }
+        .nav-btn { display: flex; align-items: center; width: calc(100% - 20px); margin: 0 10px 4px; background: white; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; cursor: pointer; font-size: .8rem; text-align: left; transition: 0.2s; }
+        .nav-btn:hover, .nav-btn.active { background: #dce6f5; border-color: var(--accent); color: var(--blue); }
+        .nav-btn.active { font-weight: 600; border-left: 4px solid var(--blue); }
+        .es-pill { margin-left: auto; background: var(--blue); color: white; border-radius: 10px; padding: 1px 6px; font-size: .65rem; }
 
-.sidebar-footer{padding:10px 13px 12px;font-size:.67rem;color:#9aabbf;line-height:1.7;margin-top:auto;}
+        /* Main Content */
+        .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .content { flex: 1; overflow-y: auto; padding: 30px; }
 
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.starters-bar{background:white;border-bottom:1px solid var(--border);padding:9px 16px;display:flex;gap:7px;flex-wrap:wrap;align-items:center;flex-shrink:0;}
-.sbar-label{font-size:.68rem;color:var(--mid);font-weight:700;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;}
-.chip{background:var(--light);border:1.5px solid var(--border);color:var(--text);border-radius:18px;padding:5px 12px;font-size:.77rem;cursor:pointer;font-weight:500;transition:background .15s,border-color .15s,color .15s;white-space:nowrap;}
-.chip:hover,.chip.active{background:var(--blue);color:white;border-color:var(--blue);}
+        /* Welcome Screen */
+        .welcome-card { text-align: center; max-width: 600px; margin: 60px auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .welcome-card h2 { color: var(--blue); margin-bottom: 15px; }
+        .welcome-card p { line-height: 1.6; color: var(--mid); }
 
-.content{flex:1;overflow-y:auto;padding:20px 24px;}
+        /* Content Cards */
+        .content-card { display: none; background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); overflow: hidden; max-width: 900px; margin: 0 auto 40px; border: 1px solid var(--border); }
+        .content-card.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Welcome */
-.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px;min-height:360px;}
-.wicon{width:58px;height:58px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.55rem;margin-bottom:14px;box-shadow:0 4px 16px rgba(0,48,135,.3);}
-.welcome h2{font-size:1.3rem;color:var(--blue);margin-bottom:7px;}
-.welcome p{color:var(--mid);font-size:.87rem;max-width:460px;line-height:1.65;}
-.welcome-hint{margin-top:20px;background:white;border:1px solid var(--border);border-radius:10px;padding:13px 17px;font-size:.81rem;color:var(--mid);line-height:1.75;max-width:480px;text-align:left;}
-.welcome-hint strong{color:var(--blue);}
+        .card-header { padding: 25px; background: linear-gradient(to right, var(--blue), var(--accent)); color: white; }
+        .card-body { padding: 30px; line-height: 1.6; }
+        
+        /* Grid Layouts for Frameworks */
+        .fw-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .fw-item { border: 1px solid var(--border); border-radius: 8px; padding: 15px; }
+        .fw-letter { font-size: 1.5rem; font-weight: 800; margin-bottom: 5px; }
+        .fw-name { font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+        
+        /* Session Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
+        th { background: var(--light); text-align: left; padding: 12px; border: 1px solid var(--border); color: var(--blue); }
+        td { padding: 12px; border: 1px solid var(--border); vertical-align: top; }
 
-/* Card */
-.content-card{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.06);}
-.card-header{padding:16px 20px;border-bottom:1px solid var(--border);}
-.card-header h2{font-size:1.14rem;color:var(--blue);margin-bottom:4px;}
-.card-header .subdesc{font-size:.83rem;color:var(--mid);margin-top:5px;line-height:1.55;}
-.meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:9px;}
-.tag{display:inline-flex;align-items:center;border-radius:12px;padding:3px 10px;font-size:.72rem;font-weight:600;}
-.tag-blue{background:#e8edf5;color:var(--blue);}
-.tag-green{background:#e6f4ec;color:var(--green);}
-.tag-orange{background:#fef3e8;color:var(--orange);}
-.tag-red{background:#fde8ec;color:var(--red);}
-.tag-purple{background:#f0ebf8;color:var(--purple);}
-.es-big{font-size:1.55rem;font-weight:800;color:var(--green);line-height:1;}
-.es-label{font-size:.7rem;color:var(--mid);}
-
-.card-body{padding:18px 20px;}
-.card-body p{font-size:.86rem;line-height:1.65;color:var(--mid);margin-bottom:12px;}
-.card-body h3{font-size:.9rem;font-weight:700;color:var(--blue);margin:16px 0 8px;display:flex;align-items:center;gap:6px;}
-
-.steps{list-style:none;padding:0;margin-bottom:14px;}
-.steps li{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0f4fa;font-size:.84rem;line-height:1.55;}
-.steps li:last-child{border-bottom:none;}
-.step-num{width:23px;height:23px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:1px;}
-
-.role-table{width:100%;border-collapse:collapse;font-size:.81rem;margin-bottom:14px;}
-.role-table th{background:var(--blue);color:white;padding:7px 11px;text-align:left;font-weight:600;}
-.role-table td{padding:7px 11px;border-bottom:1px solid #eef2f9;vertical-align:top;line-height:1.55;}
-.role-table tr:last-child td{border-bottom:none;}
-.role-table tr:nth-child(even) td{background:#f7f9fd;}
-
-.tools-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
-.tool-pill{background:#f0f4fa;border:1px solid var(--border);color:var(--accent);border-radius:7px;padding:3px 10px;font-size:.75rem;font-weight:500;}
-
-.fw-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px;}
-.fw-card{background:var(--light);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
-.fw-card .fw-letter{font-size:1.35rem;font-weight:800;color:var(--blue);line-height:1;}
-.fw-card .fw-word{font-size:.8rem;font-weight:700;color:var(--text);margin:.25em 0 .2em;}
-.fw-card .fw-desc{font-size:.75rem;color:var(--mid);line-height:1.4;}
-
-.solo-levels{display:flex;flex-direction:column;gap:7px;margin-bottom:13px;}
-.solo-item{border-radius:8px;padding:9px 13px;font-size:.82rem;line-height:1.5;}
-.solo-item strong{display:block;margin-bottom:3px;font-size:.86rem;}
-.solo-item.pre{background:#fdf0f0;border-left:4px solid #e57373;}
-.solo-item.uni{background:#fff8e8;border-left:4px solid #ffc107;}
-.solo-item.multi{background:#e8f4fd;border-left:4px solid #42a5f5;}
-.solo-item.rel{background:#e8f5e9;border-left:4px solid var(--green);}
-.solo-item.ext{background:#f3e8fd;border-left:4px solid var(--purple);}
-
-.quote{background:#f0f4fa;border-left:4px solid var(--red);border-radius:0 8px 8px 0;padding:9px 13px;font-size:.83rem;font-style:italic;color:var(--mid);margin:10px 0;}
-
-.phase-tabs{display:flex;gap:6px;margin-bottom:13px;flex-wrap:wrap;}
-.ptab{background:var(--light);border:1.5px solid var(--border);color:var(--mid);border-radius:8px;padding:6px 13px;font-size:.78rem;cursor:pointer;font-weight:500;transition:all .15s;}
-.ptab.active.surface{background:#1565c0;border-color:#1565c0;color:white;}
-.ptab.active.deep{background:var(--green);border-color:var(--green);color:white;}
-.ptab.active.transfer{background:var(--orange);border-color:var(--orange);color:white;}
-.phase-content{display:none;}
-.phase-content.active{display:block;}
-
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-thumb{background:#c5d0e0;border-radius:3px;}
-@media(max-width:620px){.sidebar{display:none;}.starters-bar{overflow-x:auto;flex-wrap:nowrap;}}
-</style>
+        /* Helpers */
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-right: 5px; text-transform: uppercase; }
+        .tag-surface { background: #e0f2f1; color: #00796b; }
+        .tag-deep { background: #e3f2fd; color: #1976d2; }
+        .tag-transfer { background: #f3e5f5; color: #7b1fa2; }
+        .link-btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--blue); color: white; text-decoration: none; border-radius: 5px; font-weight: 600; }
+    </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">TCEA</div>
-  <div>
-    <div class="htitle">TCEA Strategy Partner</div>
-    <div class="hsub">Visible Learning with Ed Tech · Mastery Series · Miguel Guhlin</div>
-  </div>
-  <span class="badge">Evidence-Based Reference</span>
+    <div class="logo">TCEA</div>
+    <div>
+        <div class="htitle">Visible Learning with Ed Tech</div>
+        <div class="hsub">AI-Powered Strategy Partner Dashboard</div>
+    </div>
+    <div class="badge">MASTERY SERIES</div>
 </header>
 
 <div class="layout">
-<aside class="sidebar">
-  <div class="slabel">High-Impact Strategies</div>
-  <button class="strat-btn" onclick="show('jigsaw',this,'s')"><span class="strat-name">Jigsaw Method</span><span class="es-pill high">0.92</span></button>
-  <button class="strat-btn" onclick="show('reciprocal',this,'s')"><span class="strat-name">Reciprocal Teaching</span><span class="es-pill high">0.74</span></button>
-  <button class="strat-btn" onclick="show('concept',this,'s')"><span class="strat-name">Concept Mapping</span><span class="es-pill">0.66</span></button>
-  <button class="strat-btn" onclick="show('problem',this,'s')"><span class="strat-name">Problem-Solving Teaching</span><span class="es-pill">0.61</span></button>
-  <button class="strat-btn" onclick="show('critical',this,'s')"><span class="strat-name">Critical Thinking</span><span class="es-pill">0.79</span></button>
-  <button class="strat-btn" onclick="show('clarity',this,'s')"><span class="strat-name">Teacher Clarity</span><span class="es-pill high">0.85</span></button>
-  <button class="strat-btn" onclick="show('argumentation',this,'s')"><span class="strat-name">Argumentation</span><span class="es-pill high">0.86</span></button>
-  <button class="strat-btn" onclick="show('reflection',this,'s')"><span class="strat-name">Self-Reflection</span><span class="es-pill high">0.81</span></button>
-  <button class="strat-btn" onclick="show('efficacy',this,'s')"><span class="strat-name">Collective Teacher Efficacy</span><span class="es-pill high">1.01</span></button>
-  <button class="strat-btn" onclick="show('video',this,'s')"><span class="strat-name">Video Microteaching</span><span class="es-pill high">0.99</span></button>
+    <div class="sidebar">
+        <div class="slabel">Frameworks</div>
+        <button class="nav-btn" onclick="showCard('p-solo')">SOLO Taxonomy</button>
+        <button class="nav-btn" onclick="showCard('p-prism')">PRISM Framework</button>
+        <button class="nav-btn" onclick="showCard('p-coaching')">TCEA EIIR Coaching</button>
 
-  <div class="divider"></div>
-  <div class="slabel">Frameworks</div>
-  <div class="phase-item" id="pi-solo" onclick="show('solo',this,'p')"><span class="phase-dot" style="background:#42a5f5"></span>SOLO Taxonomy</div>
-  <div class="phase-item" id="pi-aldo" onclick="show('aldo',this,'p')"><span class="phase-dot" style="background:var(--blue)"></span>ALDO Framework</div>
-  <div class="phase-item" id="pi-prism" onclick="show('prism',this,'p')"><span class="phase-dot" style="background:var(--purple)"></span>PRISM Framework</div>
-  <div class="phase-item" id="pi-eiir" onclick="show('eiir',this,'p')"><span class="phase-dot" style="background:var(--green)"></span>EIIR Coaching Cycle</div>
-  <div class="phase-item" id="pi-rise" onclick="show('rise',this,'p')"><span class="phase-dot" style="background:var(--orange)"></span>RISE Goals</div>
+        <div class="slabel">Evidence-Based Strategies</div>
+        <button class="nav-btn" onclick="showCard('p-jigsaw')">Jigsaw Method <span class="es-pill">0.92</span></button>
+        <button class="nav-btn" onclick="showCard('p-concept')">Concept Mapping <span class="es-pill">0.72</span></button>
+        <button class="nav-btn" onclick="showCard('p-reciprocal')">Reciprocal Teaching <span class="es-pill">0.74</span></button>
+        <button class="nav-btn" onclick="showCard('p-problem')">Problem Solving <span class="es-pill">0.61</span></button>
 
-  <div class="divider"></div>
-  <div class="slabel">Critical Thinking Tools</div>
-  <div class="phase-item" id="pi-floater" onclick="show('floater',this,'p')"><span class="phase-dot" style="background:var(--red)"></span>FLOATER Framework</div>
-  <div class="phase-item" id="pi-sift" onclick="show('sift',this,'p')"><span class="phase-dot" style="background:var(--blue)"></span>SIFT Method</div>
+        <div class="slabel">Series Sessions (1-8)</div>
+        <button class="nav-btn" onclick="showCard('s-1')">1: Evidence to Impact</button>
+        <button class="nav-btn" onclick="showCard('s-2')">2: Mapping Mastery</button>
+        <button class="nav-btn" onclick="showCard('s-3')">3: Strategic Synergy</button>
+        <button class="nav-btn" onclick="showCard('s-4')">4: Surface Spark</button>
+        <button class="nav-btn" onclick="showCard('s-5')">5: Deep Dive Dynamics</button>
+        <button class="nav-btn" onclick="showCard('s-6')">6: Transfer Triumph</button>
+        <button class="nav-btn" onclick="showCard('s-7')">7: AI Innovator</button>
+        <button class="nav-btn" onclick="showCard('s-8')">8: Reflect & Reach</button>
+    </div>
 
-  <div class="sidebar-footer">
-    Zone of Desired Effects: ES &gt; 0.40<br>
-    Typical year's growth: ES ≈ 0.40<br>
-    Source: Visible Learning MetaX (Hattie)
-  </div>
-</aside>
+    <div class="main">
+        <div class="content">
+            <div id="p-welcome" class="content-card active">
+                <div class="welcome-card">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🚀</div>
+                    <h2>Welcome to the Strategy Partner</h2>
+                    <p>Unlock the power of evidence-based teaching. Select a strategy or session from the sidebar to view high-impact implementation guides, effect sizes, and digital tool alignments.</p>
+                    <a href="https://teach.link/tceastrategypartner" target="_blank" class="link-btn">Launch AI Strategy Partner (GPT)</a>
+                </div>
+            </div>
 
-<main class="main">
-  <div class="starters-bar">
-    <span class="sbar-label">Explore:</span>
-    <span class="chip" onclick="show('phases',this,'c')">Learning Phases</span>
-    <span class="chip" onclick="show('solo',this,'c')">SOLO Taxonomy</span>
-    <span class="chip" onclick="show('aldo',this,'c')">ALDO Lesson Design</span>
-    <span class="chip" onclick="show('prism',this,'c')">PRISM Framework</span>
-    <span class="chip" onclick="show('eiir',this,'c')">EIIR Coaching</span>
-    <span class="chip" onclick="show('rise',this,'c')">RISE Goals</span>
-    <span class="chip" onclick="show('ai',this,'c')">AI + SOLO Levels</span>
-    <span class="chip" onclick="show('floater',this,'c')">FLOATER</span>
-    <span class="chip" onclick="show('sift',this,'c')">SIFT</span>
-    <span class="chip" onclick="show('sample',this,'c')">Sample Lesson</span>
-  </div>
+            <div id="p-solo" class="content-card">
+                <div class="card-header">
+                    <h2>SOLO Taxonomy</h2>
+                    <p>Structure of Observed Learning Outcome</p>
+                </div>
+                <div class="card-body">
+                    <p>A research-based alternative to Bloom's that assesses the <strong>complexity</strong> of student understanding.</p>
+                    <div class="fw-grid">
+                        <div class="fw-item" style="border-top: 4px solid var(--mid)">
+                            <div class="fw-name">Prestructural</div>
+                            <p style="font-size:0.85rem">"I don't know what I don't know." Inaccurate or irrelevant responses.</p>
+                        </div>
+                        <div class="fw-item" style="border-top: 4px solid var(--green)">
+                            <div class="fw-name">Unistructural</div>
+                            <p style="font-size:0.85rem">Understanding one relevant aspect. Surface level.</p>
+                        </div>
+                        <div class="fw-item" style="border-top: 4px solid var(--green)">
+                            <div class="fw-name">Multistructural</div>
+                            <p style="font-size:0.85rem">Several relevant aspects known, but as separate pieces.</p>
+                        </div>
+                        <div class="fw-item" style="border-top: 4px solid var(--blue)">
+                            <div class="fw-name">Relational</div>
+                            <p style="font-size:0.85rem">Integrating parts into a coherent whole. Deep learning.</p>
+                        </div>
+                        <div class="fw-item" style="border-top: 4px solid var(--purple)">
+                            <div class="fw-name">Extended Abstract</div>
+                            <p style="font-size:0.85rem">Generalizing to new domains. Transfer learning.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <div class="content" id="content">
+            <div id="p-prism" class="content-card">
+                <div class="card-header">
+                    <h2>PRISM Framework</h2>
+                    <p>Structured thinking for complex problem-solving and transfer learning.</p>
+                </div>
+                <div class="card-body">
+                    <div class="fw-grid">
+                        <div class="fw-item"><div class="fw-letter" style="color:var(--red)">P</div><div class="fw-name">Patterns</div><p>What recurring trends do you notice?</p></div>
+                        <div class="fw-item"><div class="fw-letter" style="color:var(--orange)">R</div><div class="fw-name">Reasoning</div><p>How do the pieces connect logically?</p></div>
+                        <div class="fw-item"><div class="fw-letter" style="color:var(--green)">I</div><div class="fw-name">Ideas</div><p>Generating multiple approaches or perspectives.</p></div>
+                        <div class="fw-item"><div class="fw-letter" style="color:var(--blue)">S</div><div class="fw-name">Situation</div><p>Considering the broader context and implications.</p></div>
+                        <div class="fw-item"><div class="fw-letter" style="color:var(--purple)">M</div><div class="fw-name">Methods</div><p>Evaluating and verifying solutions.</p></div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- WELCOME -->
-  <div id="p-welcome" class="welcome">
-    <div class="wicon">🧠</div>
-    <h2>Your TCEA Strategy Partner</h2>
-    <p>A self-contained reference guide for educators implementing high-impact, evidence-based instructional strategies aligned with John Hattie's Visible Learning research.</p>
-    <div class="welcome-hint">
-      <strong>How to use this guide:</strong><br>
-      • Click any <strong>strategy in the left sidebar</strong> to see what it is, its effect size, and how to use it by role.<br>
-      • Use the <strong>Explore bar above</strong> to read about frameworks: SOLO, ALDO, PRISM, EIIR, RISE, FLOATER, and SIFT.<br>
-      • All guidance is organized for <strong>Teachers · Instructional Coaches · Campus Leaders</strong>.
-    </div>
-  </div>
+            <div id="p-jigsaw" class="content-card">
+                <div class="card-header">
+                    <h2>Jigsaw Method (ES: 0.92)</h2>
+                    <span class="tag tag-surface">Surface</span> <span class="tag tag-deep">Deep</span>
+                </div>
+                <div class="card-body">
+                    <h3>Core Concept</h3>
+                    <p>Divides content into segments, making students both learners and teachers. Fosters interdependence and doubles learning acceleration.</p>
+                    <table>
+                        <tr><th>Phase</th><th>Action</th></tr>
+                        <tr><td>Home Groups</td><td>Assign unique content chunks to master.</td></tr>
+                        <tr><td>Expert Groups</td><td>Study specific content deeply with peers.</td></tr>
+                        <tr><td>Teach Back</td><td>Return to Home Groups to share expertise.</td></tr>
+                    </table>
+                    <h4 style="margin-top:20px;">EdTech Tools</h4>
+                    <p>Google Sites, Padlet, Digital Whiteboards (Whiteboard.fi).</p>
+                </div>
+            </div>
 
-  <!-- JIGSAW -->
-  <div id="p-jigsaw" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Jigsaw Method</h2>
-      <div class="subdesc">A cooperative learning structure where every student becomes both a learner and a teacher, building foundational knowledge through structured peer expertise.</div>
-      <div class="meta">
-        <div><div class="es-big">0.92</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-blue">Surface Learning</span>
-        <span class="tag tag-green">Deep Learning</span>
-        <span class="tag tag-blue">SOLO: Multistructural → Relational</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="quote">The only strategy shown to be effective across both Surface and Deep learning phases — and the only one with the potential to double student learning in a single academic year when used consistently and correctly.</div>
-      <h3>⚙️ How It Works — 5 Steps</h3>
-      <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Form Home Groups</strong> (3–9 students). Assign each member a number corresponding to a unique content chunk.</div></li>
-        <li><span class="step-num">2</span><div><strong>Expert Groups form</strong> — all students with the same number meet to deeply study their assigned content together.</div></li>
-        <li><span class="step-num">3</span><div><strong>Experts master their content</strong> using readings, videos, or resources. They complete a Jigsaw Notes Organizer (key ideas, examples, quotes, applications).</div></li>
-        <li><span class="step-num">4</span><div><strong>Return to Home Groups.</strong> Each expert teaches their section. Everyone learns the full picture through peer instruction.</div></li>
-        <li><span class="step-num">5</span><div><strong>Repeat with refinement.</strong> Send students back to expert groups with clarification questions before a final debrief.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Divide your next complex unit into 3–5 distinct content chunks. Create a Jigsaw Notes Organizer. Start with a paper version before moving to digital. Plan for at least 3 implementations — it takes practice to become routine.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Co-plan the first Jigsaw lesson. Facilitate a SOLO calibration session where teachers analyze student expert-group notes. Model the strategy with staff during PD to build buy-in and reduce anxiety.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Highlight successful implementations in staff meetings. Build a resource bank of Jigsaw-ready content chunks across subject areas. Provide dedicated cross-curricular planning time.</td></tr>
-      </table>
-      <h3>🖥️ Digital Tool Options</h3>
-      <div class="tools-row">
-        <span class="tool-pill">Google Sites</span><span class="tool-pill">Padlet</span><span class="tool-pill">Google Slides</span>
-        <span class="tool-pill">Google Docs</span><span class="tool-pill">OneNote</span><span class="tool-pill">Whiteboard.fi</span>
-      </div>
-      <p style="font-size:.79rem;color:var(--mid)">The tool is secondary — student engagement with the content is what matters. Consider having students write notes by hand first, then transfer to digital.</p>
-    </div>
-  </div>
+            <div id="s-1" class="content-card">
+                <div class="card-header">
+                    <h2>Part 1: Evidence to Impact</h2>
+                </div>
+                <div class="card-body">
+                    <h3>Core Concept</h3>
+                    <p>Introduces foundational principles of evidence-based teaching to maximize student engagement and achievement from day one.</p>
+                    <h3 style="margin-top:20px;">Key Learnings</h3>
+                    <ul>
+                        <li>Understand Effect Size (Hattie) - Target > 0.40</li>
+                        <li>Differentiate learning phases: Surface, Deep, Transfer.</li>
+                        <li>"What the hand does, the mind remembers."</li>
+                    </ul>
+                    <a href="https://drive.google.com/drive/folders/1MaTppynMFe1YMVj6Sp4RVY21ZhDnVf7L" class="link-btn">View Materials</a>
+                </div>
+            </div>
 
-  <!-- RECIPROCAL TEACHING -->
-  <div id="p-reciprocal" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Reciprocal Teaching</h2>
-      <div class="subdesc">A structured dialogue strategy where students learn four comprehension strategies and gradually take ownership of the learning process — the "Fab Four."</div>
-      <div class="meta">
-        <div><div class="es-big">0.74</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-green">Deep Learning</span>
-        <span class="tag tag-blue">SOLO: Relational</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="quote">15–20 days of implementation can move reading comprehension from 30% to 70–80%, with gains maintained a full year later — across all ages, grade levels, and content areas.</div>
-      <h3>🧩 The Fab Four</h3>
-      <div class="fw-grid">
-        <div class="fw-card"><div class="fw-letter">P</div><div class="fw-word">Predicting</div><div class="fw-desc">Anticipate what comes next, activating prior knowledge and creating purpose for engagement.</div></div>
-        <div class="fw-card"><div class="fw-letter">Q</div><div class="fw-word">Questioning</div><div class="fw-desc">Generate questions about content — moving beyond surface recall toward deeper analysis.</div></div>
-        <div class="fw-card"><div class="fw-letter">C</div><div class="fw-word">Clarifying</div><div class="fw-desc">Identify confusing elements and use strategies to resolve misunderstandings.</div></div>
-        <div class="fw-card"><div class="fw-letter">S</div><div class="fw-word">Summarizing</div><div class="fw-desc">Synthesize key information, distinguishing essential from non-essential details.</div></div>
-      </div>
-      <h3>⚙️ Implementation Steps</h3>
-      <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Teacher models</strong> each of the four strategies explicitly before students attempt them.</div></li>
-        <li><span class="step-num">2</span><div><strong>Form groups of 4–5.</strong> Each student assumes one role: Predictor, Questioner, Clarifier, or Summarizer.</div></li>
-        <li><span class="step-num">3</span><div><strong>Practice 15–30 minutes daily</strong> for 15–20 consecutive days to build the full effect.</div></li>
-        <li><span class="step-num">4</span><div><strong>Rotate roles</strong> so students develop all four comprehension strategies over time.</div></li>
-        <li><span class="step-num">5</span><div><strong>Extend beyond text</strong> — the Fab Four works equally well with videos, podcasts, and other media.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Create digital graphic organizers for each of the four roles. Use think-alouds to model each strategy first. Start with a short, accessible text before applying to complex content.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Co-plan initial lessons. Help teachers develop differentiated sentence stems for each role. Observe and give specific feedback on gradual-release pacing.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Provide PD on all four strategies. Create a cross-curricular resource bank. Highlight implementations across subject areas in staff communications.</td></tr>
-      </table>
-      <h3>🖥️ Digital Tools</h3>
-      <div class="tools-row">
-        <span class="tool-pill">Padlet</span><span class="tool-pill">Google Docs</span><span class="tool-pill">Canva Whiteboard</span>
-        <span class="tool-pill">Nearpod</span><span class="tool-pill">Wakelet</span>
-      </div>
-    </div>
-  </div>
+            <div id="p-coaching" class="content-card">
+                <div class="card-header">
+                    <h2>TCEA EIIR Coaching & RISE Goals</h2>
+                </div>
+                <div class="card-body">
+                    <h3>The EIIR Cycle</h3>
+                    <p>Empower/Engage → Investigate/Innovate → Implement/Improve → Reflect/Realize</p>
+                    
+                    <h3 style="margin-top:20px;">RISE Goal Criteria</h3>
+                    <div class="fw-grid">
+                        <div class="fw-item"><strong>R</strong> - Relevant</div>
+                        <div class="fw-item"><strong>I</strong> - Impactful</div>
+                        <div class="fw-item"><strong>S</strong> - Specific</div>
+                        <div class="fw-item"><strong>E</strong> - Energized</div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- CONCEPT MAPPING -->
-  <div id="p-concept" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Concept Mapping</h2>
-      <div class="subdesc">A visual learning strategy that helps learners organize, connect, and represent knowledge through structured diagrams — making thinking visible.</div>
-      <div class="meta">
-        <div><div class="es-big">0.66</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-green">Deep Learning</span>
-        <span class="tag tag-blue">SOLO: Multistructural → Relational</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <h3>💡 The BOOM Model</h3>
-      <div class="fw-grid">
-        <div class="fw-card"><div class="fw-letter">B</div><div class="fw-word">Brainstorm</div><div class="fw-desc">Write down all key ideas related to the topic — no filtering yet.</div></div>
-        <div class="fw-card"><div class="fw-letter">O</div><div class="fw-word">Organize</div><div class="fw-desc">Place the main idea at the center. Arrange supporting ideas around it in a hierarchy.</div></div>
-        <div class="fw-card"><div class="fw-letter">O</div><div class="fw-word">Open Connections</div><div class="fw-desc">Draw lines between related ideas to show how they connect.</div></div>
-        <div class="fw-card"><div class="fw-letter">M</div><div class="fw-word">Make It Meaningful</div><div class="fw-desc">Add linking words on connecting lines to explain each relationship explicitly.</div></div>
-      </div>
-      <h3>📊 Map Types by SOLO Level</h3>
-      <table class="role-table">
-        <tr><th>SOLO Level</th><th>Best Map Type</th></tr>
-        <tr><td>Pre-structural / Unistructural</td><td>Brainstorming maps, simple webs</td></tr>
-        <tr><td>Multistructural</td><td>Hierarchical maps, flowcharts, concept sorts</td></tr>
-        <tr><td>Relational</td><td>Network maps showing cause-effect and dependencies</td></tr>
-        <tr><td>Extended Abstract</td><td>Comparative maps, Venn diagrams, cross-domain maps</td></tr>
-      </table>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Model map creation with a think-aloud. Provide partially completed maps for students to finish. Use concept maps as pre/post assessments to show knowledge growth across a unit.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Co-plan a lesson with concept mapping as the central strategy. Help teachers connect different map types to SOLO levels. Share research on the impact of concept mapping on comprehension.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Facilitate PD on concept mapping across content areas. Encourage vertical alignment of mapping techniques K–12. Create a library of exemplar maps for teachers to reference.</td></tr>
-      </table>
-      <h3>🖥️ Digital Tools</h3>
-      <div class="tools-row">
-        <span class="tool-pill">Diagrams.net</span><span class="tool-pill">CMAP Cloud</span><span class="tool-pill">YED Live</span>
-        <span class="tool-pill">Napkin AI</span><span class="tool-pill">Canva Whiteboard</span><span class="tool-pill">Google Drawings</span>
-      </div>
-    </div>
-  </div>
+            <div id="s-default" class="content-card">
+                <div class="card-body" style="text-align: center;">
+                    <h3>Content Loading...</h3>
+                    <p>Please select a specific section from the sidebar to view full details.</p>
+                </div>
+            </div>
 
-  <!-- PROBLEM-SOLVING TEACHING -->
-  <div id="p-problem" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Problem-Solving Teaching</h2>
-      <div class="subdesc">A structured approach to problem-based learning, implemented during the Transfer phase after students have built foundational and conceptual knowledge.</div>
-      <div class="meta">
-        <div><div class="es-big">0.61</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-orange">Transfer Learning</span>
-        <span class="tag tag-purple">SOLO: Extended Abstract</span>
-      </div>
+        </div>
     </div>
-    <div class="card-body">
-      <div class="quote">Timing is everything. Problem-solving teaching only reaches its potential after students have built strong surface and deep knowledge. Deployed too early, it falls flat.</div>
-      <h3>🌈 Design Problems Using PRISM</h3>
-      <div class="fw-grid">
-        <div class="fw-card"><div class="fw-letter" style="color:var(--red)">P</div><div class="fw-word">Patterns</div><div class="fw-desc">What patterns do you notice? What do they suggest about underlying causes?</div></div>
-        <div class="fw-card"><div class="fw-letter" style="color:var(--orange)">R</div><div class="fw-word">Reasoning</div><div class="fw-desc">How do pieces of information connect logically? What cause-and-effect relationships exist?</div></div>
-        <div class="fw-card"><div class="fw-letter" style="color:var(--green)">I</div><div class="fw-word">Ideas</div><div class="fw-desc">What multiple approaches or solutions are possible? Generate options before evaluating.</div></div>
-        <div class="fw-card"><div class="fw-letter" style="color:var(--accent)">S</div><div class="fw-word">Situation</div><div class="fw-desc">What is the broader context? Who is affected? What real-world constraints apply?</div></div>
-      </div>
-      <div class="fw-card" style="margin-bottom:14px"><div class="fw-letter" style="color:var(--purple)">M</div><div class="fw-word">Methods</div><div class="fw-desc">How will you evaluate the solution? What criteria matter? How could you test it?</div></div>
-      <h3>⚙️ Designing Effective Problems</h3>
-      <ol class="steps">
-        <li><span class="step-num">1</span><div>Confirm students have <strong>mastered surface and deep learning first</strong> — use SOLO to verify.</div></li>
-        <li><span class="step-num">2</span><div>Make problems <strong>authentic and relevant</strong> — connected to real situations students can recognize.</div></li>
-        <li><span class="step-num">3</span><div>Ensure <strong>multiple solution paths exist</strong> — no single right answer.</div></li>
-        <li><span class="step-num">4</span><div>Use <strong>PRISM</strong> to structure student thinking throughout the challenge.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Design one rich problem per unit using PRISM. Pair with Think-Pair-Share + Peer Mentoring (ES: 0.74). Require students to show reasoning, not just their final answer.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Help teachers distinguish simple application tasks from true transfer. Model PRISM in planning sessions. Use SOLO to evaluate whether a problem genuinely reaches Extended Abstract.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Allocate time for extended problem-solving. Showcase transfer learning examples. Encourage cross-curricular problems that require knowledge from multiple disciplines.</td></tr>
-      </table>
-      <h3>🖥️ Digital Tools</h3>
-      <div class="tools-row">
-        <span class="tool-pill">Canva</span><span class="tool-pill">Lucidspark</span><span class="tool-pill">Padlet</span>
-        <span class="tool-pill">TinkerCAD</span><span class="tool-pill">Minecraft Education</span>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <!-- CRITICAL THINKING -->
-  <div id="p-critical" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Critical Thinking</h2>
-      <div class="subdesc">The process of analyzing, synthesizing, and evaluating information to guide beliefs and actions — essential for both deep and transfer learning.</div>
-      <div class="meta">
-        <div><div class="es-big">0.79</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-green">Deep Learning</span>
-        <span class="tag tag-orange">Transfer Learning</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="quote">"The brain works by taking shortcuts, deceiving us into seeing things that aren't there and believing things that aren't true. Critical thinking is the antidote."</div>
-      <h3>🔍 Five Core Components</h3>
-      <ol class="steps">
-        <li><span class="step-num">A</span><div><strong>Analysis</strong> — Break down complex information into components. Examine relationships between parts.</div></li>
-        <li><span class="step-num">E</span><div><strong>Evaluation</strong> — Assess the credibility, relevance, and quality of evidence and arguments.</div></li>
-        <li><span class="step-num">S</span><div><strong>Synthesis</strong> — Combine ideas from multiple sources to create new understanding.</div></li>
-        <li><span class="step-num">I</span><div><strong>Inference</strong> — Draw logical conclusions from available evidence.</div></li>
-        <li><span class="step-num">E</span><div><strong>Explanation</strong> — Clearly articulate reasoning and justify conclusions to others.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Explicitly teach FLOATER and SIFT (see sidebar). Apply them to evaluate claims, ads, AI content, and news. Create a classroom culture where "What's your evidence?" is a normal question.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Help teachers build questioning sequences that push from recall to analysis. Co-design tasks requiring students to justify their thinking in writing or discussion.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Make FLOATER and SIFT part of campus vocabulary. Integrate media literacy into PD. Highlight student critical thinking examples in walkthrough debrief conversations.</td></tr>
-      </table>
-      <p style="font-size:.79rem;color:var(--mid)">See <strong>FLOATER</strong> and <strong>SIFT</strong> in the sidebar for step-by-step guides you can use directly with students.</p>
-    </div>
-  </div>
+<script>
+    function showCard(id) {
+        // Hide all cards
+        const cards = document.querySelectorAll('.content-card');
+        cards.forEach(card => card.classList.remove('active'));
 
-  <!-- TEACHER CLARITY -->
-  <div id="p-clarity" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Teacher Clarity</h2>
-      <div class="subdesc">When teachers communicate learning intentions, success criteria, and lesson purpose with precision, students learn significantly faster across all phases.</div>
-      <div class="meta">
-        <div><div class="es-big">0.85</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-blue">All Learning Phases</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <h3>⚙️ Three Pillars</h3>
-      <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Learning Intentions</strong> — "What will I learn today, and why does it matter?" State these clearly in student-friendly language before instruction begins. Frame them using SOLO levels.</div></li>
-        <li><span class="step-num">2</span><div><strong>Success Criteria</strong> (ES: 0.64) — "How will I know when I've learned it?" Provide specific, observable criteria students can self-assess against.</div></li>
-        <li><span class="step-num">3</span><div><strong>Relevance</strong> — Connect the learning to students' lives, prior knowledge, or future goals to activate motivation and meaning.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Post learning intentions and success criteria every day in student-friendly language. Revisit them mid-lesson and at the close. Ask students: "Where are you in relation to today's success criteria?"</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>During walkthroughs, look for evidence that students can articulate the learning intention in their own words. Co-create success criteria templates aligned to SOLO levels.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Include learning intentions and success criteria in walkthrough protocols. Use Teacher Clarity principles to communicate school-wide instructional expectations. Give PD goals clear success criteria — model what you expect.</td></tr>
-      </table>
-    </div>
-  </div>
+        // Show selected
+        const activeCard = document.getElementById(id) || document.getElementById('s-default');
+        activeCard.classList.add('active');
 
-  <!-- ARGUMENTATION -->
-  <div id="p-argumentation" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Argumentation</h2>
-      <div class="subdesc">Students construct and defend evidence-based claims, directly engaging with conflicting perspectives to deepen conceptual understanding.</div>
-      <div class="meta">
-        <div><div class="es-big">0.86</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-green">Deep Learning</span>
-        <span class="tag tag-blue">SOLO: Relational → Extended Abstract</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <h3>⚙️ Claim-Evidence-Reasoning (CER)</h3>
-      <ol class="steps">
-        <li><span class="step-num">C</span><div><strong>Claim</strong> — A clear, testable statement that directly answers the question or addresses the problem.</div></li>
-        <li><span class="step-num">E</span><div><strong>Evidence</strong> — Specific data, text evidence, or observations that support the claim.</div></li>
-        <li><span class="step-num">R</span><div><strong>Reasoning</strong> — An explanation of why the evidence supports the claim, connecting to underlying principles.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Teach CER structure explicitly with graphic organizers before students use it independently. Use structured debate protocols. Require counter-arguments to push toward Extended Abstract thinking.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Help teachers build questioning sequences ("What's your evidence? How does that support your claim?"). Co-build a cross-curricular bank of argumentation prompts.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Create a campus-wide focus on argumentation across all disciplines — not just ELA. Develop cross-curricular resources. Provide PD on designing tasks that require evidence-based reasoning.</td></tr>
-      </table>
-    </div>
-  </div>
+        // Update sidebar button states
+        const buttons = document.querySelectorAll('.nav-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        // Find the button that was clicked and highlight it
+        const clickedBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(id));
+        if (clickedBtn) clickedBtn.classList.add('active');
+    }
+</script>
 
-  <!-- SELF-REFLECTION -->
-  <div id="p-reflection" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Self-Judgment and Reflection</h2>
-      <div class="subdesc">When students evaluate their own learning against clear criteria, metacognitive awareness grows and learning accelerates across all phases.</div>
-      <div class="meta">
-        <div><div class="es-big">0.81</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-blue">All Learning Phases</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="quote">"Reflection bridges theory and practice. It creates ownership over learning and transforms information into implementation."</div>
-      <h3>⚙️ Practical Approaches</h3>
-      <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Self-assess against success criteria</strong> — Students rate themselves on SOLO-anchored criteria. Where am I? Where do I need to go?</div></li>
-        <li><span class="step-num">2</span><div><strong>Exit tickets</strong> — One thing learned, one question remaining, one thing to apply. Quick and high-value.</div></li>
-        <li><span class="step-num">3</span><div><strong>Learning journals</strong> — Regular written reflection on strategies used, what worked, and next steps.</div></li>
-        <li><span class="step-num">4</span><div><strong>Peer feedback first</strong> — Structured peer review using agreed-upon criteria before individual self-assessment.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Build daily reflection routines using SOLO language. Give students time to revise work after self-assessment. Don't just collect reflections — respond to them.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Model reflective practice with teachers in EIIR Reflect & Realize conversations. Help teachers design prompts tied to specific learning intentions.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Build structured reflection into staff meetings and PLC agendas. Treat reflection as a measurable part of professional learning — not just a closing activity.</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- COLLECTIVE EFFICACY -->
-  <div id="p-efficacy" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Collective Teacher Efficacy</h2>
-      <div class="subdesc">The shared belief among a faculty that their combined efforts can produce positive outcomes for every student — the single highest-impact factor in Visible Learning research.</div>
-      <div class="meta">
-        <div><div class="es-big">1.01</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-blue">Campus-Wide</span>
-        <span class="tag tag-green">All Phases</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="quote">"When teachers collectively believe they can impact student learning, students perform dramatically better. This is the #1 factor in the Visible Learning research."</div>
-      <h3>💡 How to Build It — By Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Participate actively in PLCs. Share what worked — and what didn't. Celebrate student growth publicly. Use common instructional language (SOLO, ALDO, PRISM) to collaborate across classrooms.</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Facilitate teacher-to-teacher sharing of high-impact strategy implementations. Create structures for peer observation and debrief. Use Video Microteaching (ES: 0.99) to create collaborative reflection cycles.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Implement monthly data meetings with structured protocols focused on student growth — not just scores. Share success stories school-wide. Make collective commitments visible through RISE goals. Remove barriers to collaborative planning.</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- VIDEO MICROTEACHING -->
-  <div id="p-video" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>Video Microteaching</h2>
-      <div class="subdesc">Recording, reviewing, and reflecting on short teaching segments — one of the most powerful professional learning approaches available.</div>
-      <div class="meta">
-        <div><div class="es-big">0.99</div><div class="es-label">Effect Size</div></div>
-        <span class="tag tag-blue">Professional Learning</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <h3>⚙️ The Record–Reflect–Improve Cycle</h3>
-      <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Plan</strong> — Identify one specific strategy to focus on (e.g., delivering learning intentions). Set clear success criteria for the observation.</div></li>
-        <li><span class="step-num">2</span><div><strong>Record</strong> — Capture a 5–15 minute teaching segment. Focus matters more than length.</div></li>
-        <li><span class="step-num">3</span><div><strong>Self-review</strong> — The teacher watches privately first, using the success criteria as a lens.</div></li>
-        <li><span class="step-num">4</span><div><strong>Collaborative debrief</strong> — Share with a coach or PLC partner using structured protocols. Focus on student behavior, not teacher performance.</div></li>
-        <li><span class="step-num">5</span><div><strong>Improve and repeat</strong> — Implement one specific change. Record again within 1–2 weeks.</div></li>
-      </ol>
-      <h3>💡 Classroom Implementation by Role</h3>
-      <table class="role-table">
-        <tr><th>Role</th><th>What to Do</th></tr>
-        <tr><td>👩‍🏫 <strong>Teacher</strong></td><td>Commit to one recording cycle per month. Review privately before sharing. Key questions: "When were students most engaged? When did learning appear to stall?"</td></tr>
-        <tr><td>🧑‍💼 <strong>Coach</strong></td><td>Guide 5 teachers through a full record/reflect/improve cycle. Build psychological safety before introducing video. Keep debrief focus on evidence of student thinking — not teacher evaluation.</td></tr>
-        <tr><td>🏫 <strong>Leader</strong></td><td>Create a culture where video reflection is normal and non-evaluative. Provide the time and technology. Build credibility by recording your own practice first.</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- SOLO TAXONOMY -->
-  <div id="p-solo" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>SOLO Taxonomy</h2>
-      <div class="subdesc">Structure of the Observed Learning Outcome — a research-based framework for understanding how learning develops in complexity from surface to transfer.</div>
-      <div class="meta">
-        <span class="tag tag-blue">Assessment Framework</span>
-        <span class="tag tag-green">Learning Progression</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="quote">"The greatest value of SOLO is that it shows how our learning develops — it gives teachers a shared language for talking about student thinking."</div>
-      <h3>📊 The Five Levels</h3>
-      <div class="solo-levels">
-        <div class="solo-item pre"><strong>Pre-Structural</strong>Before formal instruction. Prior knowledge may be inaccurate or irrelevant. The student response misses the point entirely.<br><em style="font-size:.79rem">Example: Asked about deforestation, student says "Trees are green."</em></div>
-        <div class="solo-item uni"><strong>Unistructural — Surface Learning</strong>Student grasps one relevant idea but cannot connect it to anything else or apply it further.<br><em style="font-size:.79rem">Example: "Cutting trees causes deforestation." — one cause, no connections.</em></div>
-        <div class="solo-item multi"><strong>Multistructural — Surface Learning</strong>Student knows several relevant facts but sees them as separate and unconnected.<br><em style="font-size:.79rem">Example: Lists "cutting trees, agriculture, and fires" as causes — but can't explain how they interrelate.</em></div>
-        <div class="solo-item rel"><strong>Relational — Deep Learning</strong>Student connects ideas, explains relationships, and can reconcile conflicting information into a coherent whole.<br><em style="font-size:.79rem">Example: Explains how human activity, climate, and economics interact to drive deforestation.</em></div>
-        <div class="solo-item ext"><strong>Extended Abstract — Transfer Learning</strong>Student generalizes to new contexts, creates hypotheses, and applies principles to novel problems they have not seen before.<br><em style="font-size:.79rem">Example: Designs a multi-factor policy solution drawing on ecology, economics, and social science.</em></div>
-      </div>
-      <div class="quote">Approximately 82% of classroom teaching remains at surface learning level. SOLO helps teachers intentionally design for deeper progression.</div>
-      <h3>⚠️ Important Distinction</h3>
-      <p>A student's <strong>verbal understanding</strong> may be at a higher SOLO level than their <strong>written work</strong>. This gap may reflect a writing skill barrier, vocabulary challenge, or language issue — not a lack of understanding. Always investigate before drawing conclusions.</p>
-    </div>
-  </div>
-
-  <!-- ALDO -->
-  <div id="p-aldo" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>ALDO — Amazing Lesson Design Outline</h2>
-      <div class="subdesc">A comprehensive lesson design framework integrating brain-based learning, SEL, high-effect size strategies, and educational technology.</div>
-      <div class="meta">
-        <span class="tag tag-blue">Lesson Design</span>
-        <span class="tag tag-green">Technology Integration</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <h3>⚙️ Five Components</h3>
-      <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Build Relationships</strong> — Establish trust and safety through SEL and brain-based learning. Students learn best when they feel safe and valued. This step is non-negotiable.</div></li>
-        <li><span class="step-num">2</span><div><strong>Pre-Assess Students</strong> — Use low-stakes assessments to determine current SOLO level. This guides strategy selection, grouping, and pacing decisions.</div></li>
-        <li><span class="step-num">3</span><div><strong>Select Strategies</strong> — Choose high-effect size strategies matched to the appropriate learning phase (Surface, Deep, or Transfer) and your learning intention.</div></li>
-        <li><span class="step-num">4</span><div><strong>Post-Assess</strong> — Gauge effectiveness and provide targeted feedback. Compare to pre-assessment to measure growth and inform next steps.</div></li>
-        <li><span class="step-num">5</span><div><strong>Reflect and Share</strong> — Encourage metacognition for both teacher and learner. What worked? What would you change? What did students learn about their own learning?</div></li>
-      </ol>
-      <div class="quote"><strong>Core principle:</strong> Strategy first, then technology. Always identify the evidence-based strategy and its learning phase before selecting a digital tool. Ask: "Does this tool amplify the strategy — or just add complexity?"</div>
-      <h3>📐 Theoretical Foundations</h3>
-      <div class="tools-row">
-        <span class="tool-pill">Brain-Based Learning</span><span class="tool-pill">Culturally Responsive Teaching</span>
-        <span class="tool-pill">Social-Emotional Learning</span><span class="tool-pill">High-Effect Size Strategies</span>
-        <span class="tool-pill">EdTech Integration</span><span class="tool-pill">Instructional Coaching</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRISM -->
-  <div id="p-prism" class="content-card" style="display:none">
-    <div class="card-header">
-      <h2>PRISM Framework</h2>
-      <div class="subdesc">A structured thinking framework for complex problem-solving and transfer learning, aligned with the Extended Abstract level of SOLO Taxonomy.</div>
-      <div class="meta">
-        <span class="tag tag-orange">Transfer Learning</span>
-        <span class="tag tag-purple">SOLO: Extended Abstract</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="fw-grid">
-        <div class="fw-card"><div class="fw-letter" style="color:var(--red)">P</div><div class="fw-word">Patterns</div><div class="fw-desc">What recurring patterns or trends do you notice? What do they suggest about underlying causes or principles?</div></div>
-        <div class="fw-card"><div class="fw-letter" style="color:var(--orange)">R</div><div class="fw-word">Reasoning</div><div class="fw-desc">How do the pieces connect logically? What cause-and-effect relationships exist between them?</div></div>
-        <div class="fw-card"><div class="fw-letter" style="color:var(--green)">I</div><div class="fw-word">Ideas</div><div class="fw-desc">What multiple approaches or solutions
+</body>
+</html>
